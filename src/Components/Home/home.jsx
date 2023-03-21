@@ -7,15 +7,18 @@ function Home() {
     const navigate = useNavigate();
     let [loggedUser, setval] = useState(JSON.parse(sessionStorage.getItem('Usuario')))
     let [newob, setNew] = useState({});
+    let [categoriob, setCategory] = useState({});
+
     //Effects
     //1 Main effect to validate user logged and consume product and carts from APIs URL via axios
 
     const newList = (
-        newob.length ? <New new={newob} /> : <p>Loading...</p> 
+        newob.length && categoriob.length ? <New new={newob} cate={categoriob} /> : <p>Loading...</p> 
     )
     useEffect(() => {
         if (loggedUser) {
-            axios.get('http://localhost:3001/api/new', {
+            //request my new by token id
+            axios.get('http://localhost:3001/api/new/myNew', {
                 headers: {
                     'Authorization': 'Bearer ' + loggedUser,
                     'Content-Type': 'application/json'
@@ -27,6 +30,21 @@ function Home() {
             }).catch(err => {//valida errores
                 console.log("error: " + err);
             });
+            //request category 
+            axios.get('http://localhost:3001/api/categories/public', {
+                headers: {
+                    'Authorization': 'Bearer ' + loggedUser,
+                    'Content-Type': 'application/json'
+                }
+            }).then(function (response) {
+                console.log(response.data);
+                setCategory(response.data);
+            }).catch(err => {//valida errores
+                console.log("error: " + err);
+            });
+
+
+
         } else {
             //***Redirect to login***
             navigate("/")

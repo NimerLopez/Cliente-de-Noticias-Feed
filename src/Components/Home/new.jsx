@@ -1,6 +1,7 @@
 
 function New(props) {
     console.log(props.new);
+    console.log(props.cate);
     return (
         <>
             {props.new.map((news, index) => (
@@ -8,7 +9,11 @@ function New(props) {
                     <h3 className="time">{news.date}</h3>
                     <img src="https://cdn.sancarlosdigital.com/wp-content/uploads/2023/03/maquina-trituradora-696x464.jpg.webp" alt=""></img>
                     <h2 href="">{news.title}</h2>
-                    <p className="category">Deportes</p>
+                    {props.cate.map((category)=>(
+                        category._id===news.category_id?                       
+                        <p className="category">{category.name}</p>
+                        :null
+                    ))}                   
                     <p>{news.short_description}</p>
                     <a href={news.permalink}>Ver Noticia</a>
                 </div>
