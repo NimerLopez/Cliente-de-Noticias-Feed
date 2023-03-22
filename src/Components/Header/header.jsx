@@ -70,6 +70,7 @@ function Header() {
                                 <option value="/">Login</option>
                                 <option value="/register">Register</option>
                             </select>
+                                                        
                         ) :
                         (
 
