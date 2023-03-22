@@ -69,8 +69,7 @@ function Header() {
                                 <option value="UserName">Menu</option>
                                 <option value="/">Login</option>
                                 <option value="/register">Register</option>
-                            </select>
-                                                        
+                            </select>                                                      
                         ) :
                         (
 
