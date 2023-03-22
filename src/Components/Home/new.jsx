@@ -6,9 +6,9 @@ function New(props) {
         <>
             {props.new.map((news, index) => (
                 <div key={index} className="flex-new">
-                    <h3 className="time">{news.date}</h3>
+                    <h3 id="h2text"  className="time">{news.date}</h3>
                     <img src="https://cdn.sancarlosdigital.com/wp-content/uploads/2023/03/maquina-trituradora-696x464.jpg.webp" alt=""></img>
-                    <h2 href="">{news.title}</h2>
+                    <h2 id="h2text" href="">{news.title}</h2>
                     {props.cate.map((category)=>(
                         category._id===news.category_id?                       
                         <p className="category">{category.name}</p>

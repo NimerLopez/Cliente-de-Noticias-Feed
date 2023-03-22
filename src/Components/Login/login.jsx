@@ -2,10 +2,10 @@ import './login.css'
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router"
+import Header from '../Header/header';
 
 function Login() {
     const navigate = useNavigate();
-
     const userUrl = "http://localhost:3001/api/login";
     let [email, setEmail] = useState('');
     let [contra, setContra] = useState('');
@@ -28,9 +28,9 @@ function Login() {
                     'Content-Type': 'application/json'
                 }
             }).then(function (response) {
-                console.log(response);
-                if (response) {                   
-                    Dateuser = response.data;
+                console.log(response.data)
+                if (response.data.message !=="Datos Incorrectos") {                   
+                    Dateuser = response.data.token;
                     sessionStorage.setItem('Usuario',JSON.stringify(Dateuser));
                     console.log("luisraton", Dateuser);
                     navigate("/home")
@@ -49,7 +49,9 @@ function Login() {
                     //document.cookie = `token=${response.data.token}`;
                     //sessionStorage.setItem('TokenUser', JSON.stringify(Dateuser));//se guarda en la sesion   
                     //navigate("/home");
-                };
+                }else{
+                    alert("Datos Incorrectos")
+                }
             }).catch(err => {//valida errores
                 console.log("error: " + err);
                 alert("Datos incorrectos");
@@ -60,6 +62,7 @@ function Login() {
     return (
 
         <>
+            <Header></Header> 
             <div className="logbox">
                 <div className="login-title">
                     <h1>
